@@ -15,10 +15,14 @@
   },
   "dependencies": {
     "gatsby": "^2.21.37",
+    "gatsby-source-prismic": "^3.0.2",
+    "global": "^4.4.0",
+    "prismic-cli": "^3.7.8",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
   "devDependencies": {
+    "dotenv": "^8.2.0",
     "prettier": "2.0.5"
   },
   "repository": {
