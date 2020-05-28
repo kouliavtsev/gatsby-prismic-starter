@@ -5,14 +5,19 @@ require("dotenv").config({
 module.exports = {
   plugins: [
     {
-      resolve: `gatsby-source-prismic`,
+      resolve: "gatsby-source-prismic-graphql",
       options: {
-        repositoryName: `stoked-prismic-starter`,
+        repositoryName: "stoked-prismic-starter",
         accessToken: `${process.env.API_KEY}`,
-        linkResolver: ({ node, key, value }) => post => `/${post.uid}`,
-        schemas: {
-          post: require("./src/schemas/post.json"),
-        },
+        previews: true,
+        path: "/preview",
+        pages: [
+          {
+            type: "Post",
+            match: "/post/:uid",
+            component: require.resolve("./src/templates/post.js"),
+          },
+        ],
       },
     },
   ],
