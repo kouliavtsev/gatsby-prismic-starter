@@ -54,6 +54,8 @@ const Slices = ({ slices }) => {
                   <div>
                     <h2>{RichText.asText(item?.first_and_lastname)}</h2>
                     <p>{RichText.asText(item?.position)}</p>
+
+                    {/* TODO: Preprocessing External Images */}
                     <img
                       src={item?.portrait?.url}
                       alt={RichText.asText(item?.first_and_lastname)}
@@ -71,6 +73,8 @@ const Slices = ({ slices }) => {
           return (
             <section key={slice + index}>
               <h1>Quote of the day</h1>
+
+              {/* TODO: Preprocessing External Images */}
               <img
                 src={slice?.primary?.portrait_author?.url}
                 alt={RichText.asText(slice?.primary?.name_of_the_author)}
