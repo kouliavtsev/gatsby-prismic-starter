@@ -24,7 +24,7 @@ export default function Home({ data }) {
           return (
             <li key={item.node._meta.id}>
               <Link to={linkResolver(item.node._meta)}>
-                {RichText.asText(item.node.title)}
+                {RichText.asText(item?.node?.title)}
               </Link>
             </li>
           )
@@ -43,8 +43,8 @@ export default function Home({ data }) {
 const Slices = ({ slices }) => {
   return slices.map((slice, index) => {
     const res = (() => {
-      switch (slice.__typename) {
-        case "PRISMIC_HomeBodyTeam":
+      switch (slice.type) {
+        case "team":
           return (
             <section key={slice + index}>
               <h1>{RichText.asText(slice.primary.team_section)}</h1>
@@ -69,7 +69,7 @@ const Slices = ({ slices }) => {
               <hr />
             </section>
           )
-        case "PRISMIC_HomeBodyQuote":
+        case "quote":
           return (
             <section key={slice + index}>
               <h1>Quote of the day</h1>
@@ -110,6 +110,7 @@ export const query = graphql`
             body {
               __typename
               ... on PRISMIC_HomeBodyQuote {
+                type
                 primary {
                   quote
                   name_of_the_author
@@ -117,6 +118,7 @@ export const query = graphql`
                 }
               }
               ... on PRISMIC_HomeBodyTeam {
+                type
                 primary {
                   team_section
                 }
@@ -133,12 +135,14 @@ export const query = graphql`
       allPosts {
         edges {
           node {
-            title
-            _meta {
-              id
-              uid
-              lang
-              type
+            ... on PRISMIC_Post {
+              title
+              _meta {
+                id
+                uid
+                lang
+                type
+              }
             }
           }
         }
