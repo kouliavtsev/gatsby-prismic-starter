@@ -12,7 +12,7 @@ export default function Home({ data }) {
 
   return (
     <>
-      <h1>{RichText.asText(doc.node.title)}</h1>
+      <h1 style={{ color: "red" }}>{RichText.asText(doc.node.title)}</h1>
       <RichText render={doc.node.description} />
 
       <hr />
